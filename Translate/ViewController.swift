@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var deButton: UIButton!
     @IBOutlet weak var frButton: UIButton!
     @IBOutlet weak var itaButton: UIButton!
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     var langSelected = "fr"
     
     @IBOutlet weak var translateButton: UIButton!
@@ -27,6 +30,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         translateButton.layer.cornerRadius = 4
+        spinner.alpha = 0
         
     }
     
@@ -69,16 +73,16 @@ class ViewController: UIViewController {
         
         //var data = NSMutableData()var data = NSMutableData()
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
+        spinner.alpha = 1
+        view.addSubview(spinner)
+        spinner.startAnimating()
         
         var result = "<Translation Error>"
         
         NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
             
-            indicator.stopAnimating()
+            self.spinner.stopAnimating()
+            self.spinner.alpha = 0
             
             if let httpResponse = response as? HTTPURLResponse {
                 if(httpResponse.statusCode == 200){

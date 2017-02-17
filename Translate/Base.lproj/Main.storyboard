@@ -69,10 +69,14 @@
                                     <action selector="langSelection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ceh-9H-D5p"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZC0-cw-zQb">
+                                <color key="color" red="0.0" green="0.1843137255" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.88627450980392153" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="gB2-HF-nAP" firstAttribute="top" secondItem="LaV-KV-DTJ" secondAttribute="bottom" constant="21" id="04Q-jA-gtM"/>
+                            <constraint firstItem="Tk9-7M-DEK" firstAttribute="top" secondItem="ZC0-cw-zQb" secondAttribute="bottom" constant="28" id="0Yh-Va-OGz"/>
                             <constraint firstItem="LaV-KV-DTJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0xI-QZ-ozZ"/>
                             <constraint firstItem="gB2-HF-nAP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="76" id="3Oe-H6-AFc"/>
                             <constraint firstItem="tqc-NW-5Rx" firstAttribute="top" secondItem="LaV-KV-DTJ" secondAttribute="bottom" constant="21" id="6IN-Uq-FvS"/>
@@ -87,6 +91,7 @@
                             <constraint firstItem="dii-Vg-90N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="ZWE-Rj-lyN"/>
                             <constraint firstItem="WzQ-Vu-wD7" firstAttribute="leading" secondItem="gB2-HF-nAP" secondAttribute="trailing" constant="12" id="fYA-Dj-JuN"/>
                             <constraint firstItem="tqc-NW-5Rx" firstAttribute="leading" secondItem="dQB-Gz-N5q" secondAttribute="trailing" constant="8" symbolic="YES" id="fz9-ac-Kfo"/>
+                            <constraint firstItem="ZC0-cw-zQb" firstAttribute="centerX" secondItem="Tk9-7M-DEK" secondAttribute="centerX" id="pJA-Wn-Eq8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gB2-HF-nAP" secondAttribute="bottom" constant="301" id="pxX-1D-mJS"/>
                             <constraint firstItem="dQB-Gz-N5q" firstAttribute="top" secondItem="LaV-KV-DTJ" secondAttribute="bottom" constant="21" id="vxC-c5-QoY"/>
                         </constraints>
@@ -96,6 +101,7 @@
                         <outlet property="frButton" destination="dQB-Gz-N5q" id="3Ka-fx-aIt"/>
                         <outlet property="ireButton" destination="gB2-HF-nAP" id="pA8-jR-IUS"/>
                         <outlet property="itaButton" destination="tqc-NW-5Rx" id="RJ6-AG-v76"/>
+                        <outlet property="spinner" destination="ZC0-cw-zQb" id="Wb5-gg-ri8"/>
                         <outlet property="textToTranslate" destination="dii-Vg-90N" id="478-0N-HnA"/>
                         <outlet property="translateButton" destination="Tk9-7M-DEK" id="XsS-Nt-ely"/>
                         <outlet property="translatedText" destination="LaV-KV-DTJ" id="khA-Lw-nbZ"/>
