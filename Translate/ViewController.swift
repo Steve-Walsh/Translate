@@ -13,10 +13,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var textToTranslate: UITextView!
     @IBOutlet weak var translatedText: UITextView!
     
+    @IBOutlet weak var ireButton: UIButton!
+    @IBOutlet weak var deButton: UIButton!
+    @IBOutlet weak var frButton: UIButton!
+    @IBOutlet weak var itaButton: UIButton!
+    var langSelected = "fr"
+    
+    @IBOutlet weak var translateButton: UIButton!
+    
+    
     //var data = NSMutableData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        translateButton.layer.cornerRadius = 4
         
     }
     
@@ -25,12 +35,31 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func langSelection(_ sender: AnyObject) {
+        print("button pressed")
+        
+        if(sender === ireButton){
+            langSelected = "ga"
+        }else if (sender === deButton){
+             langSelected = "de"
+        }else if (sender === itaButton){
+             langSelected = "it"
+        }else{
+             langSelected = "fr"
+        }
+    }
+    
+    
+    
     @IBAction func translate(_ sender: AnyObject) {
         
         let str = textToTranslate.text
         let escapedStr = str?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         
-        let langStr = ("en|fr").addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+      
+        
+        let langStr = ("en|" + langSelected).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         
         let urlStr:String = ("https://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
         
