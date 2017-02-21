@@ -42,9 +42,9 @@ class ViewController: UIViewController {
         
     }
     
-    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
-        self.view.endEditing(true)
-    }
+//    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -102,39 +102,40 @@ class ViewController: UIViewController {
         var result = "<Translation Error>"
         
         
-        let task = session.dataTask(with: request){
-            (data, response, error) in
-            
-            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
-            
-            if let response = response {print(response)}
-            
-            guard error == nil else {
-                print("error caling get")
-                print(error)
-                return
-            }
-            
-            guard let responseData = data else{
-                print("error in data ")
-                return
-            }
-            
-            do {
-                guard let todo = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] else{
-                        print("error in covert data to json")
-                    
-                        return
-                    }
-                result = todo["translatedText"] as! String
-                print(result)
-            }catch {
-                print("error")
-                return
-            }
-            
-        }
-        task.resume()
+        
+//        let task = session.dataTask(with: request){
+//            (data, response, error) in
+//            
+//            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
+//            
+//            if let response = response {print(response)}
+//            
+//            guard error == nil else {
+//                print("error caling get")
+//                print(error)
+//                return
+//            }
+//            
+//            guard let responseData = data else{
+//                print("error in data ")
+//                return
+//            }
+//            
+//            do {
+//                guard let todo = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] else{
+//                        print("error in covert data to json")
+//                    
+//                        return
+//                    }
+//                result = todo["translatedText"] as! String
+//                print("the result of the call is : "   + result)
+//            }catch {
+//                print("error")
+//                return
+//            }
+//            
+//        }
+//        task.resume()
         
     
         
