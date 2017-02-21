@@ -42,9 +42,9 @@ class ViewController: UIViewController {
         
     }
     
-//    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -103,39 +103,44 @@ class ViewController: UIViewController {
         
         
         
-//        let task = session.dataTask(with: request){
-//            (data, response, error) in
-//            
-//            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
-//            
-//            if let response = response {print(response)}
-//            
-//            guard error == nil else {
-//                print("error caling get")
-//                print(error)
-//                return
-//            }
-//            
-//            guard let responseData = data else{
-//                print("error in data ")
-//                return
-//            }
-//            
-//            do {
-//                guard let todo = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] else{
-//                        print("error in covert data to json")
-//                    
-//                        return
-//                    }
-//                result = todo["translatedText"] as! String
-//                print("the result of the call is : "   + result)
-//            }catch {
-//                print("error")
-//                return
-//            }
-//            
-//        }
-//        task.resume()
+        let task = session.dataTask(with: request){
+            (data, response, error) in
+            
+            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
+            
+            if let response = response {print(response)}
+            
+            guard error == nil else {
+                print("error caling get")
+                print(error)
+                return
+            }
+            
+            guard let responseData = data else{
+                print("error in data ")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if(httpResponse.statusCode == 200){
+            
+                    let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
+            
+                    if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
+                        let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
+                            result = responseData.object(forKey: "translatedText") as! String
+                    }
+                }
+                DispatchQueue.main.sync {
+                    self.spinner.stopAnimating()
+                    self.spinner.alpha = 0
+                    self.translatedText.text = result
+                }
+               
+            }
+            
+        }
+        task.resume()
         
     
         
