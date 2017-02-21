@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var langSelected = "fr"
+ 
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+
+    
+    
     
     @IBOutlet weak var translateButton: UIButton!
     
@@ -31,7 +36,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         translateButton.layer.cornerRadius = 4
         spinner.alpha = 0
+        ireButton.alpha = 0.4
+        deButton.alpha = 0.4
+        itaButton.alpha = 0.4
         
+    }
+    
+    override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,16 +53,25 @@ class ViewController: UIViewController {
     
     
     @IBAction func langSelection(_ sender: AnyObject) {
-        print("button pressed")
+       // print("button pressed")
+        ireButton.alpha = 0.4
+        deButton.alpha = 0.4
+        itaButton.alpha = 0.4
+        frButton.alpha = 0.4
         
         if(sender === ireButton){
             langSelected = "ga"
+            ireButton.alpha = 1
         }else if (sender === deButton){
              langSelected = "de"
+            deButton.alpha = 1
         }else if (sender === itaButton){
-             langSelected = "it"
+            langSelected = "it"
+            itaButton.alpha = 1
         }else{
-             langSelected = "fr"
+            langSelected = "fr"
+            frButton.alpha = 1
+            
         }
     }
     
@@ -71,6 +92,7 @@ class ViewController: UIViewController {
         
         let request = URLRequest(url: url!)// Creating Http Request
         
+        
         //var data = NSMutableData()var data = NSMutableData()
         
         spinner.alpha = 1
@@ -79,26 +101,66 @@ class ViewController: UIViewController {
         
         var result = "<Translation Error>"
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
+        
+        let task = session.dataTask(with: request){
+            (data, response, error) in
             
-            self.spinner.stopAnimating()
-            self.spinner.alpha = 0
+            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode == 200){
-                    
-                    let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
-                    
-                    if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
-                        let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
-                        
-                        result = responseData.object(forKey: "translatedText") as! String
-                    }
-                }
-                
-                self.translatedText.text = result
+            if let response = response {print(response)}
+            
+            guard error == nil else {
+                print("error caling get")
+                print(error)
+                return
             }
+            
+            guard let responseData = data else{
+                print("error in data ")
+                return
+            }
+            
+            do {
+                guard let todo = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] else{
+                        print("error in covert data to json")
+                    
+                        return
+                    }
+                result = todo["translatedText"] as! String
+                print(result)
+            }catch {
+                print("error")
+                return
+            }
+            
         }
+        task.resume()
+        
+    
+        
+//        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
+//            
+//            self.spinner.stopAnimating()
+//            self.spinner.alpha = 0
+//            
+//            if let httpResponse = response as? HTTPURLResponse {
+//                if(httpResponse.statusCode == 200){
+//                    
+//                    let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
+//                    
+//                    if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
+//                        let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
+//                        
+//                        result = responseData.object(forKey: "translatedText") as! String
+//                    }
+//                }
+//                
+//                self.translatedText.text = result
+//            }
+
+//        }
+        
+        
         
     }
 }
