@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B961FA31E687DD8003D6475 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B961FA21E687DD8003D6475 /* SwiftSpinner.swift */; };
 		7BEB98791E571A55002E8CD5 /* DE.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEB98731E571A55002E8CD5 /* DE.png */; };
 		7BEB987A1E571A55002E8CD5 /* IE.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEB98741E571A55002E8CD5 /* IE.png */; };
 		7BEB987B1E571A55002E8CD5 /* IT.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEB98751E571A55002E8CD5 /* IT.png */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B961FA21E687DD8003D6475 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		7BEB98731E571A55002E8CD5 /* DE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DE.png; sourceTree = "<group>"; };
 		7BEB98741E571A55002E8CD5 /* IE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IE.png; sourceTree = "<group>"; };
 		7BEB98751E571A55002E8CD5 /* IT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IT.png; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				FFD2F9BD1BD1101A00F54057 /* Assets.xcassets */,
 				FFD2F9BF1BD1101A00F54057 /* LaunchScreen.storyboard */,
 				FFD2F9C21BD1101A00F54057 /* Info.plist */,
+				7B961FA21E687DD8003D6475 /* SwiftSpinner.swift */,
 			);
 			path = Translate;
 			sourceTree = "<group>";
@@ -116,6 +119,9 @@
 		FFD2F9AB1BD1101A00F54057 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					ireButtonCurrLang,
+				);
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = WIT;
 				TargetAttributes = {
@@ -169,6 +175,7 @@
 			files = (
 				FFD2F9B91BD1101A00F54057 /* ViewController.swift in Sources */,
 				FFD2F9B71BD1101A00F54057 /* AppDelegate.swift in Sources */,
+				7B961FA31E687DD8003D6475 /* SwiftSpinner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var textToTranslate: UITextView!
@@ -17,10 +19,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var deButton: UIButton!
     @IBOutlet weak var frButton: UIButton!
     @IBOutlet weak var itaButton: UIButton!
+    @IBOutlet weak var gbButton: UIButton!
+    
+    @IBOutlet weak var gbTransButton: UIButton!
+    @IBOutlet weak var ireTransButton: UIButton!
+    @IBOutlet weak var deTransButton: UIButton!
+    @IBOutlet weak var frTransButton: UIButton!
+    @IBOutlet weak var itaTransButton: UIButton!
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    var langSelected = "fr"
+    var currLangSelected = "en"
+    var transLangSelected = "fr"
  
     let session = URLSession(configuration: URLSessionConfiguration.default)
 
@@ -34,12 +44,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        translateButton.layer.cornerRadius = 4
+        //translateButton.layer.cornerRadius = 4
+        //textToTranslate.layer.cornerRadius = 5
+        //translatedText.layer.cornerRadius = 5
         spinner.alpha = 0
         ireButton.alpha = 0.4
         deButton.alpha = 0.4
         itaButton.alpha = 0.4
+        frButton.alpha = 0.4
         
+        
+        ireTransButton.alpha = 0.4
+        gbTransButton.alpha = 0.4
+        deTransButton.alpha = 0.4
+        itaTransButton.alpha = 0.4
     }
     
     override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
@@ -58,19 +76,60 @@ class ViewController: UIViewController {
         deButton.alpha = 0.4
         itaButton.alpha = 0.4
         frButton.alpha = 0.4
+        gbButton.alpha = 0.4
         
         if(sender === ireButton){
-            langSelected = "ga"
+            currLangSelected = "ga"
+            textToTranslate.text = "<Téacs a aistriú>"
             ireButton.alpha = 1
         }else if (sender === deButton){
-             langSelected = "de"
+            currLangSelected = "de"
+            textToTranslate.text = "<Text zu übersetzen>"
             deButton.alpha = 1
         }else if (sender === itaButton){
-            langSelected = "it"
+            currLangSelected = "it"
+            textToTranslate.text = "<Testo da tradurre>"
             itaButton.alpha = 1
-        }else{
-            langSelected = "fr"
+        }else if (sender === frButton){
+            currLangSelected = "fr"
+            textToTranslate.text = "<Texte à traduire>"
             frButton.alpha = 1
+        }else{
+            currLangSelected = "en"
+            gbButton.alpha = 1
+            textToTranslate.text = "<Text to translate>"
+            
+        }
+    }
+    
+    
+    @IBAction func transLangSelection(_ sender: AnyObject) {
+        ireTransButton.alpha = 0.4
+        deTransButton.alpha = 0.4
+        itaTransButton.alpha = 0.4
+        frTransButton.alpha = 0.4
+        gbTransButton.alpha = 0.4
+        
+        if(sender === ireTransButton){
+            transLangSelected = "ga"
+            //textToTranslate.text = "<Téacs a aistriú>"
+            ireTransButton.alpha = 1
+        }else if (sender === deTransButton){
+            transLangSelected = "de"
+            //textToTranslate.text = "<Text zu übersetzen>"
+            deTransButton.alpha = 1
+        }else if (sender === itaTransButton){
+            transLangSelected = "it"
+            //textToTranslate.text = "<Testo da tradurre>"
+            itaTransButton.alpha = 1
+        }else if (sender === frTransButton){
+            transLangSelected = "fr"
+            //textToTranslate.text = "<Texte à traduire>"
+            frTransButton.alpha = 1
+        }else{
+            transLangSelected = "en"
+            gbTransButton.alpha = 1
+            //textToTranslate.text = "<Text to translate>"
             
         }
     }
@@ -79,94 +138,79 @@ class ViewController: UIViewController {
     
     @IBAction func translate(_ sender: AnyObject) {
         
-        let str = textToTranslate.text
-        let escapedStr = str?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        if ( currLangSelected == transLangSelected){
         
-      
-        
-        let langStr = ("en|" + langSelected).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        
-        let urlStr:String = ("https://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
-        
-        let url = URL(string: urlStr)
-        
-        let request = URLRequest(url: url!)// Creating Http Request
-        
-        
-        //var data = NSMutableData()var data = NSMutableData()
-        
-        spinner.alpha = 1
-        view.addSubview(spinner)
-        spinner.startAnimating()
-        
-        var result = "<Translation Error>"
-        
-        
-        
-        let task = session.dataTask(with: request){
-            (data, response, error) in
+            let alert = UIAlertController(title: "Alert", message: "Current language and translation language are the same", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
-            if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
+        }else{
+            let str = textToTranslate.text
+            let escapedStr = str?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            let langStr = (currLangSelected + "|" + transLangSelected).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        
+            let urlStr:String = ("https://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
+        
+            let url = URL(string: urlStr)
+        
+            let request = URLRequest(url: url!)// Creating Http Request
+        
+        
             
-            if let response = response {print(response)}
+            //spinner.alpha = 1
+            //view.addSubview(spinner)
+            //spinner.startAnimating()
             
-            guard error == nil else {
-                print("error caling get")
-                print(error)
-                return
-            }
             
-            guard let responseData = data else{
-                print("error in data ")
-                return
-            }
+            // https://github.com/icanzilb/SwiftSpinner
+            SwiftSpinner.show("Connecting to satellite...")
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode == 200){
+        
+        
+            var result = "<Translation Error>"
+        
+        
+        
+            let task = session.dataTask(with: request){
+                (data, response, error) in
             
-                    let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
+                if let data = data{print(String(data: data, encoding: .utf8) ?? "NO DATA")}
             
-                    if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
-                        let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
-                            result = responseData.object(forKey: "translatedText") as! String
+                if let response = response {print(response)}
+            
+                guard error == nil else {
+                    print("error caling get")
+                    print(error)
+                    return
+                }
+            
+                guard let responseData = data else{
+                    print("error in data ")
+                    return
+                }
+            
+                if let httpResponse = response as? HTTPURLResponse {
+                    if(httpResponse.statusCode == 200){
+            
+                        let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
+            
+                        if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
+                            let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
+                                result = responseData.object(forKey: "translatedText") as! String
+                        }
                     }
-                }
-                DispatchQueue.main.sync {
-                    self.spinner.stopAnimating()
-                    self.spinner.alpha = 0
-                    self.translatedText.text = result
-                }
+                    DispatchQueue.main.sync {
+                        //self.spinner.stopAnimating()
+                        //self.spinner.alpha = 0
+                        self.translatedText.text = result
+                        SwiftSpinner.hide()
+                    }
                
-            }
+                }
             
+                }
+            task.resume()
         }
-        task.resume()
-        
-    
-        
-//        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) { response, data, error in
-//            
-//            self.spinner.stopAnimating()
-//            self.spinner.alpha = 0
-//            
-//            if let httpResponse = response as? HTTPURLResponse {
-//                if(httpResponse.statusCode == 200){
-//                    
-//                    let jsonDict: NSDictionary!=(try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)) as! NSDictionary
-//                    
-//                    if(jsonDict.value(forKey: "responseStatus") as! NSNumber == 200){
-//                        let responseData: NSDictionary = jsonDict.object(forKey: "responseData") as! NSDictionary
-//                        
-//                        result = responseData.object(forKey: "translatedText") as! String
-//                    }
-//                }
-//                
-//                self.translatedText.text = result
-//            }
-
-//        }
-        
-        
         
     }
 }
