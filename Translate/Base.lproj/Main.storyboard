@@ -35,13 +35,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tk9-7M-DEK">
-                                <color key="backgroundColor" red="0.0" green="0.1843137255" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.15294117647058825" green="0.68235294117647061" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="JpC-TT-kLt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Translate">
-                                    <color key="titleColor" red="0.90196078430000004" green="0.8862745098" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.1843137255" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -148,7 +148,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.88627450980392153" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aEb-b8-2IH" firstAttribute="top" secondItem="fmb-io-Oxg" secondAttribute="top" id="0CQ-nr-KD1"/>
                             <constraint firstItem="aEb-b8-2IH" firstAttribute="leading" secondItem="gB2-HF-nAP" secondAttribute="leading" id="27O-f5-T3B"/>

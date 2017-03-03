@@ -53,6 +53,8 @@ class ViewController: UIViewController {
         itaButton.alpha = 0.4
         frButton.alpha = 0.4
         
+        //rgb(236, 240, 241)
+        //rgb(39, 174, 96)
         
         ireTransButton.alpha = 0.4
         gbTransButton.alpha = 0.4
