@@ -52,9 +52,7 @@ class ViewController: UIViewController {
         deButton.alpha = 0.4
         itaButton.alpha = 0.4
         frButton.alpha = 0.4
-        
-        //rgb(236, 240, 241)
-        //rgb(39, 174, 96)
+
         
         ireTransButton.alpha = 0.4
         gbTransButton.alpha = 0.4
@@ -82,24 +80,31 @@ class ViewController: UIViewController {
         
         if(sender === ireButton){
             currLangSelected = "ga"
+            if(textToTranslate.text.contains("<")){
             textToTranslate.text = "<Téacs a aistriú>"
+            }
+            
             ireButton.alpha = 1
         }else if (sender === deButton){
             currLangSelected = "de"
-            textToTranslate.text = "<Text zu übersetzen>"
+            if(textToTranslate.text.contains("<")){
+            textToTranslate.text = "<Text zu übersetzen>"}
             deButton.alpha = 1
         }else if (sender === itaButton){
             currLangSelected = "it"
-            textToTranslate.text = "<Testo da tradurre>"
+            if(textToTranslate.text.contains("<")){
+            textToTranslate.text = "<Testo da tradurre>"}
             itaButton.alpha = 1
         }else if (sender === frButton){
             currLangSelected = "fr"
-            textToTranslate.text = "<Texte à traduire>"
+            if(textToTranslate.text.contains("<")){
+            textToTranslate.text = "<Texte à traduire>"}
             frButton.alpha = 1
         }else{
             currLangSelected = "en"
             gbButton.alpha = 1
-            textToTranslate.text = "<Text to translate>"
+            if(textToTranslate.text.contains("<")){
+            textToTranslate.text = "<Text to translate>"}
             
         }
     }
