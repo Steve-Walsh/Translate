@@ -70,6 +70,13 @@ class ViewController: UIViewController {
     }
     
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if(textToTranslate.text.contains("<")){
+            textToTranslate.text = ""
+        }
+    }
+    
+    
     @IBAction func langSelection(_ sender: AnyObject) {
        // print("button pressed")
         ireButton.alpha = 0.4
