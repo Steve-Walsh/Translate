@@ -5,9 +5,9 @@ Used as a teaching assignment for students of Waterford Institute of Technology 
 
 
 # Updated by Stephen Walsh
--Added an extra feature for users to choose language they are translating from. 
--Updated the spiner icon. 
--Updated the colour scheme. 
--Added a launch screen. 
--Added a application icon
-
+  - Added an extra feature for users to choose language they are translating from. 
+  - Updated the spiner icon. 
+  - Updated the colour scheme. 
+  - Added a launch screen. 
+  - Added a application icon
+  - Added three extra supported languages, german, italian and irish.
